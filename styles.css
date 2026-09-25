@@ -1,86 +1,375 @@
-/* Basic page styles */
+/* Shared layout */
+
+: root {
+    --navy: #12324a;
+    --blue: #1f6f8b;
+    --blue-dark: #15536a;
+    --sky: #e8f4f7;
+    --page: #f6f9fb;
+    --surface: #ffffff;
+    --text: #20313d;
+    --muted: #5b6d78;
+    --line: #d7e4e9;
+    --shadow: 0 10px 26px rgba(18, 50, 74, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     margin: 0;
+    background: var(--page);
+    color: var(--text);
     font-family: Arial, sans-serif;
     line-height: 1.6;
 }
-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px;
-}
-
-/* Header */
 
 header {
-    background-color: #1f4e78;
-    color: white;
-    padding: 24px;
+    padding: 36px 24px 28px;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: #fff;
     text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 0.02em;
 }
 
 header p {
-    margin: 8px 0 16px;
+    max-width: 620px;
+    margin: 8px auto 24px;
+    color: #d8eef2;
 }
 
-/* Navigation */
-
-nav ul {
-    list-style: none;
+header nav ul,
+main > nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 24px;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
+    list-style: none;
 }
 
-nav a {
-    color: white;
+header nav a {
+    display: inline-block;
+    padding: 6px 0;
+    color: #fff;
+    font-weight: 700;
     text-decoration: none;
 }
 
-nav a:hover {
+header nav a:hover,
+header nav a:focus-visible {
+    color: #bde8ee;
     text-decoration: underline;
 }
 
-/* Main content sections */
-
-main section {
-    background-color: #f4f7fa;
-    margin-bottom: 24px;
-    padding: 20px;
-    border-radius: 8px;
+main {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 42px 0 24px;
 }
 
-/* Start Learning button */
+main > h2 {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
 
-.start-button {
-    display: inline-block;
-    background-color: #1f4e78;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
+main > p {
+    max-width: 800px;
+    margin: 0 0 28px;
+    color: var(--muted);
+}
+
+main a {
+    color: var(--blue-dark);
+    font-weight: 700;
+}
+
+main a:hover,
+main a:focus-visible {
+    color: var(--navy);
+}
+
+main > nav {
+    margin: 0 0 36px;
+    padding: 20px 24px;
+    border: 1px solid #c7e0e5;
+    border-radius: 12px;
+    background: var(--sky);
+}
+
+main > nav h3 {
+    margin: 0 0 12px;
+    color: var(--navy);
+    font-size: 1.05rem;
+}
+
+main > nav a {
+    display: block;
+    padding: 8px 14px;
+    border: 1px solid #b8d5dc;
+    border-radius: 999px;
+    background: #fff;
     text-decoration: none;
 }
 
-.start-button:hover {
-    background-color: #163a5c;
-}/* Footer */
+main > nav a:hover,
+main > nav a:focus-visible {
+    border-color: var(--blue);
+    background: var(--blue);
+    color: #fff;
+}
+
+main > section {
+    margin: 0 0 36px;
+    padding: 30px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    scroll-margin-top: 20px;
+}
+
+main > section > h2 {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+main > section > p {
+    margin-top: 0;
+    color: var(--muted);
+}
+
+/* Lesson sections */
+
+body:has(#internal-components):not(:has(figure)) main > section:not(:last-child) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+body:has(#internal-components):not(:has(figure)) main > section > h2,
+body:has(#internal-components):not(:has(figure)) main > section > p {
+    grid-column: 1 / -1;
+}
+
+body:has(#internal-components):not(:has(figure)) main > section > article {
+    height: 100%;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+    background: #fbfdfe;
+}
+
+body:has(#internal-components):not(:has(figure)) main > section > article h3 {
+    margin: 0 0 8px;
+    color: var(--blue-dark);
+    font-size: 1.15rem;
+}
+
+body:has(#internal-components):not(:has(figure)) main > section > article p {
+    margin: 0 0 10px;
+}
+
+body:has(#internal-components):not(:has(figure)) main > section > article p:last-child {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+}
+
+body:has(#internal-components):not(:has(figure)) main > section:last-child {
+    display: block;
+    background: var(--sky);
+}
+
+body:has(#internal-components):not(:has(figure)) main > section:last-child ol {
+    display: grid;
+    gap: 8px;
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+/* Computer parts cards */
+
+body:has(figure) main > section:not(:last-child) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+body:has(figure) main > section > h2 {
+    grid-column: 1 / -1;
+}
+
+body:has(figure) main > section > article {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(18, 50, 74, 0.06);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+body:has(figure) main > section > article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(18, 50, 74, 0.13);
+}
+
+body:has(figure) main figure {
+    margin: 0;
+    background: #edf6f8;
+}
+
+body:has(figure) main figure img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+body:has(figure) main figcaption {
+    padding: 8px 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+body:has(figure) main article > h3,
+body:has(figure) main article > p {
+    margin-right: 18px;
+    margin-left: 18px;
+}
+
+body:has(figure) main article > h3 {
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: var(--blue-dark);
+    font-size: 1.15rem;
+}
+
+body:has(figure) main article > p {
+    margin-top: 0;
+    color: var(--muted);
+    font-size: 0.93rem;
+}
+
+body:has(figure) main > p:last-child {
+    margin-top: 10px;
+}
+
+/* Shared footer and controls */
+
+.start-button {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 7px;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.start-button:hover,
+.start-button:focus-visible {
+    background: var(--blue-dark);
+    color: #fff;
+    transform: translateY(-1px);
+}
 
 footer {
-    background-color: #1f4e78;
-    color: white;
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: var(--navy);
+    color: #d8eef2;
     text-align: center;
-    padding: 16px;
-    margin-top: 24px;
 }
 
 footer p {
     margin: 0;
+}
+
+@media (max-width: 820px) {
+    main {
+        width: min(100% - 28px, 680px);
+        padding-top: 30px;
+    }
+
+    body:has(figure) main > section:not(:last-child) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    header {
+        padding: 28px 16px 22px;
+    }
+
+    header p {
+        margin-bottom: 18px;
+        font-size: 0.94rem;
+    }
+
+    header nav ul,
+    main > nav ul {
+        gap: 6px 14px;
+    }
+
+    header nav a {
+        font-size: 0.92rem;
+    }
+
+    main {
+        width: min(100% - 24px, 460px);
+        padding-top: 24px;
+    }
+
+    main > nav {
+        padding: 16px;
+    }
+
+    main > nav ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    main > nav a {
+        padding: 7px 9px;
+        text-align: center;
+        font-size: 0.88rem;
+    }
+
+    main > section {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    body:has(#internal-components):not(:has(figure)) main > section:not(:last-child),
+    body:has(figure) main > section:not(:last-child) {
+        display: block;
+    }
+
+    body:has(#internal-components):not(:has(figure)) main > section > article,
+    body:has(figure) main > section > article {
+        margin-top: 14px;
+    }
+
+    body:has(figure) main figure img {
+        height: 180px;
+    }
 }
